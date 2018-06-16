@@ -1,4 +1,4 @@
-# DeployContract.py
+# DeployRegistrarContract.py
 
 import os, sys, time
 from web3 import Web3
@@ -12,7 +12,7 @@ def main():
 	else:
 		print('Successfully connected to the Ethereum Network')
 		print('------------------------------------------------------')
-		contract_name = input('Contract name: ')
+		contract_name = 'RegistrarContract'
 		contract_path = os.path.dirname(__file__) + '/../Contracts/' + contract_name + '.sol'
 		
 		# Check contract file is existed
@@ -37,6 +37,8 @@ def main():
 				web3.personal.unlockAccount(web3.eth.defaultAccount, pwd)
 				# Submit the transaction that deploys the contract
 				tx_hash = contract.constructor().transact()
+				# Wait for the transaction to be mined, and get the transaction receipt
+				tx_receipt = web3.eth.waitForTransactionReceipt(tx_hash)
 
 				# Write contract information to file
 				file = open(os.path.dirname(__file__) + '/../' + contract_name + '.txt', 'a')
