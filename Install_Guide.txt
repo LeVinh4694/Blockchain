@@ -10,3 +10,11 @@ sudo apt-get install python3
 sudo apt-get install python3-pip
 ->Install web3 for python3
 pip3 install web3
+->Install python3 solc
+pip3 install py-solc
+
+->Install sublime3
+
+Create new private network commands:
+geth --identity "node0" --rpc --rpcport "8080" --rpccorsdomain "*" --datadir "Node0" --port "30303" --nodiscover --rpcapi "db,eth,net,web3,personal,web3" --networkid 1999 init "GenesisJSON\g1.json"
+geth --identity "node0" --rpc --rpcport "8080" --rpccorsdomain "*" --datadir "Node0" --port "30303" --nodiscover --rpcapi "db,eth,net,web3,personal,web3" --networkid 1999 console
