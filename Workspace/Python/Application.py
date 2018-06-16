@@ -3,7 +3,7 @@
 import os, sys, time
 from web3 import Web3
 
-registrar_address = '0x0d8c9d10Ca79388587AC4F71A425e4952AD49293'
+registrar_address = '0x3C02D620dd4b5310DCe7B9Ce5205b5BE60413E20'
 registrar_abi = [{'constant': True, 'inputs': [{'name': '', 'type': 'uint64'}], 'name': 'users', 'outputs': 
 				[{'name': 'id_number', 'type': 'uint64'}, {'name': 'accAddr', 'type': 'address'}, {'name': 'RContract', 'type': 'address'}], 
 				'payable': False, 'stateMutability': 'view', 'type': 'function'}, {'constant': True, 'inputs': [{'name': 'id_number', 'type': 'uint64'}], 
@@ -24,7 +24,7 @@ def send_Ether(obj, receiver, amount):
 		# Send transaction
 		tx_hash = obj.eth.sendTransaction({'from':obj.eth.coinbase, 'to':obj.toChecksumAddress(receiver), 'value': obj.toWei(amount, "ether")})
 		# Wait for the transaction to be mined, and get the transaction receipt
-		tx_receipt = obj.eth.waitForTransactionReceipt(tx_hash)
+		#tx_receipt = obj.eth.waitForTransactionReceipt(tx_hash)
 		print('Current balance: ' + str(obj.fromWei(obj.eth.getBalance(obj.eth.coinbase), 'ether')))
 	except:
 		print('Not enough money')
@@ -41,7 +41,7 @@ def newRecord_transact(obj, contract, id_number, accAddr, RC):
 	try:
 		tx_hash = contract.functions.newRecord(id_number, obj.toChecksumAddress(accAddr), obj.toChecksumAddress(RC)).transact()
 		# Wait for the transaction to be mined, and get the transaction receipt
-		tx_receipt = obj.eth.waitForTransactionReceipt(tx_hash)
+		#tx_receipt = obj.eth.waitForTransactionReceipt(tx_hash)
 	except:
 		print('No permission')
 
@@ -66,7 +66,7 @@ def main():
 
 		# Create the contract instance with the newly-deployed address
 		registrar = web3.eth.contract(address=registrar_address, abi=registrar_abi)
-		#newRecord_transact(web3, registrar, 201690347, '0xc6478021b4ae27831fd6180fb92651bcc1c62e82', '0xc6478021b4ae27831fd6180fabcde1bcc1c62e82')
+		#newRecord_transact(web3, registrar, 201690345, '0xc6478021b4ae27831fd6180fb92651bcc1c62e82', '0xc6478021b4ae27831fd6180fabcde1bcc1c62e82')
 		#print(getInfo_call(registrar, 201690345))
 
 if __name__ == '__main__':

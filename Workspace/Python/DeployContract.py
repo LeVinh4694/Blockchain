@@ -37,11 +37,9 @@ def main():
 				web3.personal.unlockAccount(web3.eth.defaultAccount, pwd)
 				# Submit the transaction that deploys the contract
 				tx_hash = contract.constructor().transact()
-				# Wait for the transaction to be mined, and get the transaction receipt
-				tx_receipt = web3.eth.waitForTransactionReceipt(tx_hash)
 
 				# Write contract information to file
-				file = open(contract_name + '.txt', 'a')
+				file = open(os.path.dirname(__file__) + '/../' + contract_name + '.txt', 'a')
 				file.write(contract_name + '\n')
 				file.write(tx_receipt.contractAddress + '\n')
 				file.write(str(contract_interface['abi']) + '\n\n')
