@@ -1,3 +1,0 @@
-miner.start(1)
-miner.stop()
-eth.getBalance(eth.accounts[0])
