@@ -1,0 +1,12 @@
+->Install geth on Ubuntu
+sudo apt-get install software-properties-common
+sudo add-apt-repository -y ppa:ethereum/ethereum
+sudo apt-get update
+sudo apt-get install ethereum
+
+->Install Python3
+sudo apt-get install python3
+->Install pip3
+sudo apt-get install python3-pip
+->Install web3 for python3
+pip3 install web3
