@@ -7,9 +7,12 @@ from tkinter import *
 DEBUG_MODE = 1
 
 class HealthCare:
-	def __init__(self, obj, debug):
+	def __init__(self, obj, debug, pwd=''):
 		self.DEBUG_MODE = debug
 		self.obj = obj
+
+		if self.DEBUG_MODE:
+			self.pwd = pwd
 
 		self.registrar_address = '0x64070232d0aC078a12E5839B4112ABc8ca31D932'
 		self.registrar_abi = [{'constant': True, 'inputs': [{'name': '', 'type': 'uint64'}], 'name': 'users', 'outputs': 
@@ -42,8 +45,6 @@ class HealthCare:
 		# Unlock account
 		if not DEBUG_MODE:
 			self.pwd = input('Password: ')
-		else:
-			self.pwd = '123456'
 		self.obj.personal.unlockAccount(self.obj.eth.coinbase, self.pwd)
 
 		if not self.obj.isAddress(receiver):
@@ -65,8 +66,6 @@ class HealthCare:
 		# Unlock account
 		if not DEBUG_MODE:
 			self.pwd = input('Password: ')
-		else:
-			self.pwd = '123456'
 
 		if not self.obj.isAddress(account) or \
 		   not self.obj.isAddress(accAddr) or \
@@ -104,7 +103,7 @@ def main():
 		print('Cannot connect to the Ethereum Network')
 		return 
 	else:
-		healthcare = HealthCare(web3, 1)
+		healthcare = HealthCare(web3, 1, '123456')
 
 		# Test send ether
 		print('TEST SEND ETHER FUNCTION')
