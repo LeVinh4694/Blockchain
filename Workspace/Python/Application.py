@@ -6,160 +6,164 @@ from tkinter import *
 
 DEBUG_MODE = 1
 
-registrar_address = '0x82C83D67E482729F69C4dBf8eE8885453BCF7E0E'
-registrar_abi = [{'constant': True, 'inputs': [{'name': '', 'type': 'uint64'}], 'name': 'users', 'outputs': 
-				[{'name': 'id_number', 'type': 'uint64'}, {'name': 'accAddr', 'type': 'address'}, {'name': 'RContract', 'type': 'address'}], 
-				'payable': False, 'stateMutability': 'view', 'type': 'function'}, {'constant': True, 'inputs': [{'name': 'id_number', 'type': 'uint64'}], 
-				'name': 'getInfo', 'outputs': [{'name': '', 'type': 'address'}, {'name': '', 'type': 'address'}], 
-				'payable': False, 'stateMutability': 'view', 'type': 'function'}, {'constant': False, 'inputs': 
-				[{'name': 'id_number', 'type': 'uint64'}, {'name': 'accAddr', 'type': 'address'}, {'name': 'RContract', 'type': 'address'}], 
-				'name': 'newRecord', 'outputs': [], 'payable': False, 'stateMutability': 'nonpayable', 'type': 'function'}, {'inputs': [], 
-				'payable': False, 'stateMutability': 'nonpayable', 'type': 'constructor'}]
+class HealthCare:
+	def __init__(self, obj, debug):
+		self.DEBUG_MODE = debug
+		self.obj = obj
 
-summary_address = '0x6e98137698A07bb8A7C2CFE1BD5a1292Ceea2B53'
-summary_abi = [{'constant': False, 'inputs': [{'name': 'id_number', 'type': 'uint64'}, {'name': 'ppr', 'type': 'address'}, {'name': 'stt', 'type': 'uint8'}], 
-				'name': 'newPPR', 'outputs': [], 'payable': False, 'stateMutability': 'nonpayable', 'type': 'function'}, {'constant': False, 
-				'inputs': [{'name': 'id_number', 'type': 'uint64'}, {'name': 'stt', 'type': 'uint8'}], 'name': 'changeStatus', 'outputs': [], 'payable': False, 
-				'stateMutability': 'nonpayable', 'type': 'function'}, {'constant': True, 'inputs': [{'name': 'id_number', 'type': 'uint64'}], 'name': 'getInfo', 
-				'outputs': [{'name': '', 'type': 'address'}, {'name': '', 'type': 'uint8'}], 'payable': False, 'stateMutability': 'view', 'type': 'function'}, 
-				{'constant': True, 'inputs': [], 'name': 'ownerAddr', 'outputs': [{'name': '', 'type': 'address'}], 'payable': False, 'stateMutability': 'view', 
-				'type': 'function'}, {'constant': True, 'inputs': [{'name': '', 'type': 'uint64'}], 'name': 'PPR', 'outputs': [{'name': 'id_number', 'type': 'uint64'}, 
-				{'name': 'ppr', 'type': 'address'}, {'name': 'stt', 'type': 'uint8'}], 'payable': False, 'stateMutability': 'view', 'type': 'function'}, {'inputs': 
-				[{'name': 'owner', 'type': 'address'}], 'payable': False, 'stateMutability': 'nonpayable', 'type': 'constructor'}]
+		self.registrar_address = '0x64070232d0aC078a12E5839B4112ABc8ca31D932'
+		self.registrar_abi = [{'constant': True, 'inputs': [{'name': '', 'type': 'uint64'}], 'name': 'users', 'outputs': 
+							[{'name': 'id_number', 'type': 'uint64'}, {'name': 'accAddr', 'type': 'address'}, {'name': 'RContract', 'type': 'address'}], 
+							'payable': False, 'stateMutability': 'view', 'type': 'function'}, {'constant': True, 'inputs': [{'name': 'id_number', 'type': 'uint64'}], 
+							'name': 'getInfo', 'outputs': [{'name': '', 'type': 'address'}, {'name': '', 'type': 'address'}], 
+							'payable': False, 'stateMutability': 'view', 'type': 'function'}, {'constant': False, 'inputs': 
+							[{'name': 'id_number', 'type': 'uint64'}, {'name': 'accAddr', 'type': 'address'}, {'name': 'RContract', 'type': 'address'}], 
+							'name': 'newRecord', 'outputs': [], 'payable': False, 'stateMutability': 'nonpayable', 'type': 'function'}, {'inputs': [], 
+							'payable': False, 'stateMutability': 'nonpayable', 'type': 'constructor'}]
 
-ppr_address = ''
-ppr_abi = []
+		self.summary_address = '0x6e98137698A07bb8A7C2CFE1BD5a1292Ceea2B53'
+		self.summary_abi = [{'constant': False, 'inputs': [{'name': 'id_number', 'type': 'uint64'}, {'name': 'ppr', 'type': 'address'}, {'name': 'stt', 'type': 'uint8'}], 
+							'name': 'newPPR', 'outputs': [], 'payable': False, 'stateMutability': 'nonpayable', 'type': 'function'}, {'constant': False, 
+							'inputs': [{'name': 'id_number', 'type': 'uint64'}, {'name': 'stt', 'type': 'uint8'}], 'name': 'changeStatus', 'outputs': [], 'payable': False, 
+							'stateMutability': 'nonpayable', 'type': 'function'}, {'constant': True, 'inputs': [{'name': 'id_number', 'type': 'uint64'}], 'name': 'getInfo', 
+							'outputs': [{'name': '', 'type': 'address'}, {'name': '', 'type': 'uint8'}], 'payable': False, 'stateMutability': 'view', 'type': 'function'}, 
+							{'constant': True, 'inputs': [], 'name': 'ownerAddr', 'outputs': [{'name': '', 'type': 'address'}], 'payable': False, 'stateMutability': 'view', 
+							'type': 'function'}, {'constant': True, 'inputs': [{'name': '', 'type': 'uint64'}], 'name': 'PPR', 'outputs': [{'name': 'id_number', 'type': 'uint64'}, 
+							{'name': 'ppr', 'type': 'address'}, {'name': 'stt', 'type': 'uint8'}], 'payable': False, 'stateMutability': 'view', 'type': 'function'}, {'inputs': 
+							[{'name': 'owner', 'type': 'address'}], 'payable': False, 'stateMutability': 'nonpayable', 'type': 'constructor'}]
 
-def send_Ether(obj, receiver, amount):
-	# Unlock account
-	pwd = input('Password: ')
-	obj.eth.defaultAccount = obj.eth.coinbase
-	obj.personal.unlockAccount(obj.eth.coinbase, pwd)
-	try:
-		# Send transaction
-		tx_hash = obj.eth.sendTransaction({'from':obj.eth.coinbase, 'to':obj.toChecksumAddress(receiver), 'value': obj.toWei(amount, 'ether')})
-		if DEBUG_MODE:
-			# Wait for the transaction to be mined, and get the transaction receipt
-			tx_receipt = obj.eth.waitForTransactionReceipt(tx_hash)
-	except:
-		return 'Not enough money'
+		ppr_address = ''
+		ppr_abi = []
 
-def newRecord_transact(obj, account, contract, id_number, accAddr, RC):
-	# Unlock account
-	pwd = input('Password: ')
-	obj.eth.defaultAccount = account
-	obj.personal.unlockAccount(obj.eth.defaultAccount, pwd)
-	if not type(id_number) == int:
-		return 'Invalid ID number'
-	# Send function transaction
-	try:
-		# Send transaction
-		tx_hash = contract.functions.newRecord(id_number, obj.toChecksumAddress(accAddr), obj.toChecksumAddress(RC)).transact()
-		if DEBUG_MODE:
-			# Wait for the transaction to be mined, and get the transaction receipt
-			tx_receipt = obj.eth.waitForTransactionReceipt(tx_hash)
-	except:
-		return 'No permission or no gas enough'
+		# Create the contract instance with the newly-deployed address
+		self.registrar = self.obj.eth.contract(address=self.registrar_address, abi=self.registrar_abi)					
 
-def getRCInfo_call(contract, id_number):
-	if not type(id_number) == int:
-		return contract.functions.getInfo(0).call()
-	else:
-		return contract.functions.getInfo(id_number).call()
+	def send_Ether(self, receiver, amount):
+		# Unlock account
+		if not DEBUG_MODE:
+			self.pwd = input('Password: ')
+		else:
+			self.pwd = '123456'
+		self.obj.personal.unlockAccount(self.obj.eth.coinbase, self.pwd)
 
-def newPPR_transact(obj, account, contract, id_number, ppr, stt):
-	if not type(id_number) == int:
-		return'Invalid ID number'
-	if not type(stt) == int or stt > 1 or stt < 0:
-		return 'Invalid status'
-	# Unlock account
-	pwd = input('Password: ')
-	obj.eth.defaultAccount = account
-	obj.personal.unlockAccount(obj.eth.defaultAccount, pwd)
-	try:
-		# Send function transaction
-		tx_hash = contract.functions.newPPR(id_number, obj.toChecksumAddress(ppr), stt).transact()
-		if DEBUG_MODE:
-			# Wait for the transaction to be mined, and get the transaction receipt
-			tx_receipt = obj.eth.waitForTransactionReceipt(tx_hash)
-	except:
-		return 'No permission or no gas enough'
+		if not self.obj.isAddress(receiver):
+			return 'Invalid address'
 
-def changeStt_transact(obj, account, contract, id_number, stt):
-	if not type(id_number) == int:
-		return 'Invalid ID number'
-	if not type(stt) == int or stt > 1 or stt < 0:
-		return 'Invalid status'
-	# Unlock account
-	pwd = input('Password: ')
-	obj.eth.defaultAccount = account
-	obj.personal.unlockAccount(obj.eth.defaultAccount, pwd)
-	try:
-		# Send function transaction
-		tx_hash = contract.functions.changeStatus(id_number, stt).transact()
-		if DEBUG_MODE:
-			# Wait for the transaction to be mined, and get the transaction receipt
-			tx_receipt = obj.eth.waitForTransactionReceipt(tx_hash)
-	except:
-		return 'No permission or no gas enough'
+		try:
+			# Send transaction
+			self.tx_hash = self.obj.eth.sendTransaction({'from':self.obj.eth.coinbase, 
+													'to':self.obj.toChecksumAddress(receiver), 
+													'value': self.obj.toWei(amount, 'ether')})
+			if self.DEBUG_MODE:
+				# Wait for the transaction to be mined, and get the transaction receipt
+				self.tx_receipt = self.obj.eth.waitForTransactionReceipt(self.tx_hash)
+			return 'OK'
+		except:
+			return 'Invalid value'
 
-def getSCInfo_call(contract, id_number):
-	if not type(id_number) == int:
-		print('Invalid ID number')
-		return contract.functions.getInfo(0).call()
-	else:
-		return contract.functions.getInfo(id_number).call()
+	def newRecord(self, account, id_number, accAddr, RC):
+		# Unlock account
+		if not DEBUG_MODE:
+			self.pwd = input('Password: ')
+		else:
+			self.pwd = '123456'
+
+		if not self.obj.isAddress(account) or \
+		   not self.obj.isAddress(accAddr) or \
+		   not self.obj.isAddress(RC):
+			return 'Invalid address'
+		if not type(id_number) == int:
+			return 'Invalid ID number'
+
+		self.obj.eth.defaultAccount = self.obj.toChecksumAddress(account)
+		self.obj.personal.unlockAccount(self.obj.eth.defaultAccount, self.pwd)
+
+		try:
+			# Send transaction
+			self.tx_hash = self.registrar.functions.newRecord(id_number, 
+														self.obj.toChecksumAddress(accAddr), 
+														self.obj.toChecksumAddress(RC)).transact()
+			if self.DEBUG_MODE:
+				# Wait for the transaction to be mined, and get the transaction receipt
+				self.tx_receipt = self.obj.eth.waitForTransactionReceipt(self.tx_hash)
+			return 'OK'
+		except:
+			return 'Wrong owner'
+
+	def getRCInfo(self, id_number):
+		if not type(id_number) == int:
+			return 'Invalid ID number'
+		else:
+			return self.registrar.functions.getInfo(id_number).call()
 
 # Test system
 def main():
-	web3 = Web3(Web3.HTTPProvider('http://localhost:8080', request_kwargs={'timeout': 60}))
+	web3 = Web3(Web3.HTTPProvider('http://localhost:8545', request_kwargs={'timeout': 60}))
 	# Check connectrion status
 	if web3.isConnected() == False:
 		print('Cannot connect to the Ethereum Network')
 		return 
 	else:
-		# Create the contract instance with the newly-deployed address
-		registrar = web3.eth.contract(address=registrar_address, abi=registrar_abi)
-		summary = web3.eth.contract(address=summary_address, abi=summary_abi)
+		healthcare = HealthCare(web3, 1)
 
-		# Send Ether test
-		print('\nTest send ether')
-		acc1_balance = web3.fromWei(web3.eth.getBalance(web3.eth.accounts[1]), 'ether')
-		send_Ether(web3, web3.eth.accounts[1], 5)
-		assert(web3.fromWei(web3.eth.getBalance(web3.eth.accounts[1]), 'ether') == (acc1_balance + 5))
-		
-		# Test create new record
-		print('\nTest create new record')
-		print('Test #1')
-		error = newRecord_transact(web3, web3.eth.accounts[1], 
-									registrar, 
-									201690345, 
-									'0xc6478021b4ae27831fd6180fb92651bcc1c62e82', 
-									'0x6e98137698A07bb8A7C2CFE1BD5a1292Ceea2B53')
-		assert('No permission or no gas enough' == error)
+		# Test send ether
+		print('TEST SEND ETHER FUNCTION')
+		print('-----------------------------------------')
+		print('Test #1: Invalid address')
+		ret = healthcare.send_Ether('0x172e212b63f9fdc767705739ee746f2315bd0d86a', 5)
+		assert('Invalid address' == ret)
+		print('Passed')
+		print('Test #2: Invalid value')
+		ret = healthcare.send_Ether('0x172e212b63f9fdc767705739ee746f2315bd0d86', 'a')
+		assert('Invalid value' == ret)
+		print('Passed')
+		print('Test #3: correct address & value')
+		balance = web3.fromWei(web3.eth.getBalance(web3.eth.accounts[1]), 'ether')
+		ret = healthcare.send_Ether('0x172e212b63f9fdc767705739ee746f2315bd0d86', 5)
+		assert('OK' == ret)
+		assert((balance + 5) == web3.fromWei(web3.eth.getBalance(web3.eth.accounts[1]), 'ether'))
+		print('Passed')
 
-		print('Test #2')
-		error = newRecord_transact(web3, web3.eth.accounts[0], 
-									registrar, 
-									'hello', 
-									'0xc6478021b4ae27831fd6180fb92651bcc1c62e82', 
-									'0x6e98137698A07bb8A7C2CFE1BD5a1292Ceea2B53')
-		assert('Invalid ID number' == error)
-
-		print('Test #3')
-		newRecord_transact(web3, web3.eth.accounts[0], 
-								registrar, 
-								201690345, 
-								'0xc6478021b4ae27831fd6180fb92651bcc1c62e82', 
-								'0x6e98137698A07bb8A7C2CFE1BD5a1292Ceea2B53')
-		res = getRCInfo_call(registrar, 201690345)
-		assert(web3.toChecksumAddress('0xc6478021b4ae27831fd6180fb92651bcc1c62e82') == web3.toChecksumAddress(res[0]))
-		assert(web3.toChecksumAddress('0x6e98137698A07bb8A7C2CFE1BD5a1292Ceea2B53') == web3.toChecksumAddress(res[1]))
-
-		#newPPR_transact(web3, web3.eth.accounts[1], summary, 123456789, '0x9dBfb6D87CF66944f99eE11263094D9f08ecB9c9', 1)
-		#changeStt_transact(web3, web3.eth.accounts[1], summary, 123456789, 0)
-		#print(getSCInfo_call(summary, 123456789))
-		return
+		# Test registrar contract
+		print('\nTEST NEW RECORD FUNCTION')
+		print('-----------------------------------------')
+		print('Test #4: Invalid address')
+		ret = healthcare.newRecord('0x0f8cccddbd89be8029df82ad4f5706a0b63067eba', 201690345, 
+									'0x172e212b63f9fdc767705739ee746f2315bd0d86', 
+									'0x64070232d0aC078a12E5839B4112ABc8ca31D93A')
+		assert('Invalid address' == ret)
+		print('Passed')
+		ret = healthcare.newRecord('0x0f8cccddbd89be8029df82ad4f5706a0b63067eb', 201690345, 
+									'0x172e212b63f9fdc767705739ee746f2315bd0d86a', 
+									'0x64070232d0aC078a12E5839B4112ABc8ca31D93A')
+		assert('Invalid address' == ret)
+		print('Passed')
+		ret = healthcare.newRecord('0x0f8cccddbd89be8029df82ad4f5706a0b63067eb', 201690345, 
+									'0x172e212b63f9fdc767705739ee746f2315bd0d86', 
+									'0x64070232d0aC078a12E5839B4112ABc8ca31D93Aa')
+		assert('Invalid address' == ret)
+		print('Passed')
+		print('Test #5: Invalid id number')
+		ret = healthcare.newRecord(web3.eth.coinbase, 'hello', 
+									'0x172e212b63f9fdc767705739ee746f2315bd0d86', 
+									'0xe19B16284c572E55DFd7d6d05AC22b19Cf622Fa9')
+		assert('Invalid ID number' == ret)
+		print('Passed')
+		print('Test #6: Correct value but wrong owner')
+		ret = healthcare.newRecord(web3.eth.accounts[1], 201690345, 
+									'0x172e212b63f9fdc767705739ee746f2315bd0d86', 
+									'0xe19B16284c572E55DFd7d6d05AC22b19Cf622Fa9')
+		assert('Wrong owner' == ret)
+		print('Passed')
+		print('Test #7: Correct value')
+		ret = healthcare.newRecord(web3.eth.coinbase, 201690345, 
+									'0x172e212b63f9fdc767705739ee746f2315bd0d86', 
+									'0xe19B16284c572E55DFd7d6d05AC22b19Cf622Fa9')
+		assert('OK' == ret)
+		ret = healthcare.getRCInfo(201690345)
+		assert(web3.toChecksumAddress('0x172e212b63f9fdc767705739ee746f2315bd0d86') == web3.toChecksumAddress(ret[0]))
+		assert(web3.toChecksumAddress('0xe19B16284c572E55DFd7d6d05AC22b19Cf622Fa9') == web3.toChecksumAddress(ret[1]))
+		print('Passed')
 
 if __name__ == '__main__':
 	main()

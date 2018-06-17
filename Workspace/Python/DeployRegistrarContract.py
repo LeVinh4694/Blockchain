@@ -5,7 +5,7 @@ from web3 import Web3
 from solc import compile_source
 
 def main():
-	web3 = Web3(Web3.HTTPProvider('http://localhost:8080', request_kwargs={'timeout': 60}))
+	web3 = Web3(Web3.HTTPProvider('http://localhost:8545', request_kwargs={'timeout': 60}))
 	# Check connectrion status
 	if web3.isConnected() == False:
 		print('Cannot connect to the Ethereum Network')
