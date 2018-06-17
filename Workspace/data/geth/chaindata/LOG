@@ -30,3 +30,40 @@
 22:46:01.748522 table@compaction committed F-1 S-778B Ke·0 D·60 T·80.507492ms
 22:46:01.748598 table@remove removed @5
 22:46:01.748637 table@remove removed @2
+=============== Jun 17, 2018 (+07) ===============
+14:28:14.550787 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+14:28:14.589192 version@stat F·[0 1] S·12KiB[0B 12KiB] Sc·[0.00 0.00]
+14:28:14.589274 db@open opening
+14:28:14.589469 journal@recovery F·1
+14:28:14.598249 journal@recovery recovering @6
+14:28:14.724259 memdb@flush created L0@9 N·676 S·42KiB "Dat..ion,v204":"r\x00\x00..H\x8e ,v875"
+14:28:14.732292 version@stat F·[1 1] S·54KiB[42KiB 12KiB] Sc·[0.25 0.00]
+14:28:14.791847 db@janitor F·4 G·0
+14:28:14.791920 db@open done T·202.613669ms
+=============== Jun 17, 2018 (+07) ===============
+15:47:11.780706 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+15:47:11.780806 version@stat F·[1 1] S·54KiB[42KiB 12KiB] Sc·[0.25 0.00]
+15:47:11.780815 db@open opening
+15:47:11.780844 journal@recovery F·1
+15:47:11.782916 journal@recovery recovering @10
+15:47:11.859025 memdb@flush created L0@12 N·407 S·18KiB "Dat..ion,v881":"r\x00\x00..s\xd5\xd6,v1283"
+15:47:11.862280 version@stat F·[2 1] S·73KiB[60KiB 12KiB] Sc·[0.50 0.00]
+15:47:11.918374 db@janitor F·5 G·0
+15:47:11.918468 db@open done T·137.632608ms
+15:47:11.927473 table@compaction L0·2 -> L1·1 S·73KiB Q·1289
+15:47:11.993096 table@build created L1@15 N·799 S·61KiB "Dat..ion,v881":"r\x00\x00..H\x8e ,v875"
+15:47:11.993150 version@stat F·[0 1] S·61KiB[0B 61KiB] Sc·[0.00 0.00]
+15:47:12.051934 table@compaction committed F-2 S-11KiB Ke·0 D·425 T·124.343398ms
+15:47:12.052023 table@remove removed @12
+15:47:12.052065 table@remove removed @9
+15:47:12.052093 table@remove removed @8
+=============== Jun 17, 2018 (+07) ===============
+17:28:55.364469 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+17:28:55.364563 version@stat F·[0 1] S·61KiB[0B 61KiB] Sc·[0.00 0.00]
+17:28:55.364570 db@open opening
+17:28:55.364596 journal@recovery F·1
+17:28:55.366480 journal@recovery recovering @13
+17:28:55.409496 memdb@flush created L0@16 N·2 S·239B "Dat..ion,v1289":"Las..der,v1290"
+17:28:55.412136 version@stat F·[1 1] S·62KiB[239B 61KiB] Sc·[0.25 0.00]
+17:28:55.469949 db@janitor F·4 G·0
+17:28:55.470041 db@open done T·105.450016ms
