@@ -4,8 +4,6 @@ import os, sys, time
 from web3 import Web3
 from tkinter import *
 
-DEBUG_MODE = 1
-
 class HealthCare:
 	def __init__(self, obj, debug, pwd=''):
 		self.DEBUG_MODE = debug
@@ -43,7 +41,7 @@ class HealthCare:
 
 	def send_Ether(self, receiver, amount):
 		# Unlock account
-		if not DEBUG_MODE:
+		if not self.DEBUG_MODE:
 			self.pwd = input('Password: ')
 		self.obj.personal.unlockAccount(self.obj.eth.coinbase, self.pwd)
 
@@ -64,7 +62,7 @@ class HealthCare:
 
 	def newRecord(self, account, id_number, accAddr, RC):
 		# Unlock account
-		if not DEBUG_MODE:
+		if not self.DEBUG_MODE:
 			self.pwd = input('Password: ')
 
 		if not self.obj.isAddress(account) or \
