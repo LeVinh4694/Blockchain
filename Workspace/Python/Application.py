@@ -63,8 +63,8 @@ class HealthCare:
 		try:
 			# Send transaction
 			self.tx_hash = self.obj.eth.sendTransaction({'from':self.obj.eth.coinbase, 
-													'to':self.obj.toChecksumAddress(receiver), 
-													'value': self.obj.toWei(amount, 'ether')})
+										'to':self.obj.toChecksumAddress(receiver), 
+										'value': self.obj.toWei(amount, 'ether')})
 			if self.DEBUG_MODE:
 				# Wait for the transaction to be mined, and get the transaction receipt
 				self.tx_receipt = self.obj.eth.waitForTransactionReceipt(self.tx_hash)
@@ -90,8 +90,8 @@ class HealthCare:
 		try:
 			# Send transaction
 			self.tx_hash = self.registrar.functions.newRecord(id_number, 
-														self.obj.toChecksumAddress(accAddr), 
-														self.obj.toChecksumAddress(RC)).transact()
+										self.obj.toChecksumAddress(accAddr), 
+										self.obj.toChecksumAddress(RC)).transact()
 			if self.DEBUG_MODE:
 				# Wait for the transaction to be mined, and get the transaction receipt
 				self.tx_receipt = self.obj.eth.waitForTransactionReceipt(self.tx_hash)
@@ -124,8 +124,8 @@ class HealthCare:
 		try:
 			# Send transaction
 			self.tx_hash = self.summary.functions.newPPR(id_number,
-														self.obj.toChecksumAddress(ppr), 
-														stt).transact()
+											self.obj.toChecksumAddress(ppr), 
+											stt).transact()
 			if self.DEBUG_MODE:
 				# Wait for the transaction to be mined, and get the transaction receipt
 				self.tx_receipt = self.obj.eth.waitForTransactionReceipt(self.tx_hash)
