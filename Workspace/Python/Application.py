@@ -2,7 +2,6 @@
 
 import os, sys, time
 from web3 import Web3
-from tkinter import *
 
 class HealthCare:
 	def __init__(self, obj, debug, pwd=''):
